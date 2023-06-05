@@ -8,9 +8,11 @@ class Contact:
         self.email = email
         self.phone = phone
 
-    
-    def add_contact(self, cls):
-        pass
+
+    @classmethod    
+    def add_contact(cls, name, email, phone):
+        new_contact = cls(name, email, phone)
+        
 
 
     def edit_contact(self):
@@ -23,3 +25,15 @@ class Contact:
 
     def save_contact(self):
         pass
+
+
+    # def search_contact_by_name(self):
+    #     pass
+
+
+    # def search_contact_by_email(self):
+    #     pass
+
+
+    # def group_contacts_into_catogories(self):
+    #     pass

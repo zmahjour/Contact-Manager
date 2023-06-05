@@ -3,13 +3,18 @@ import pickle
 
 class User:
 
+    users = []   
+
     def __init__(self, username, password):
         self.username = username
         self.password = password
+        self.user_contacts = []
 
 
-    def create_account(self):
-        pass
+    @classmethod
+    def create_account(cls, username, password):
+        new_user = cls(username, password)
+        cls.users.append(new_user)
 
 
     def authenticate_account(self):
@@ -25,30 +30,3 @@ class User:
 
 
 
-def user_authenticate(username, password):
-    pass
-
-
-
-def add_new_contact(name, email, phone):
-    pass
-
-
-
-def edit_exist_contact(name, email, phone):  # How can find the user and then edit it?
-    pass
-
-
-
-def delete_contact(name):
-    pass
-
-
-
-def view_all_contacts():
-    pass
-
-
-
-def quit():
-    pass
