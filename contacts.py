@@ -13,8 +13,8 @@ class Contact:
     @classmethod    
     def add_contact(cls, name, email, phone):
         new_contact = [cls(name, email, phone)]
-        new_lst = cls.get_list_of_all() + new_contact
-        cls.save_to_file(new_lst)
+        new_contacts_lst = cls.get_list_of_all() + new_contact
+        cls.save_to_file(new_contacts_lst)
 
 
     @staticmethod

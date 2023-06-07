@@ -2,8 +2,6 @@ import pickle
 
 class User:
 
-    users = []   
-
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -11,8 +9,16 @@ class User:
 
     @classmethod
     def create_account(cls, username, password):
-        new_user = cls(username, password)
-        cls.users.append(new_user)
+        new_user = [cls(username, password)]
+        new_users_lst = cls.get_list_of_all() + new_user
+        cls.save_to_file(new_users_lst)
+
+
+    @staticmethod
+    def get_list_of_all():
+        with open("users.pickle", "rb") as f:
+            list_of_all = pickle.load(f)
+            return list_of_all
 
 
     def authenticate_account(self, username, password):
@@ -27,13 +33,32 @@ class User:
             return "The username is wrong"
 
 
-    def modify_account(self, username, password):
-        self.username = username
-        self.password = password
+    @classmethod
+    def modify_account(cls, current_username, username, password):
+        obj = cls.find_contact_by_username(current_username)
+        obj.username = username or obj.username
+        obj.password = password or obj.password
+        cls.delete_user(current_username)
+        cls.create_account(obj.username, obj.password)
 
 
-    def save_user(self):
-        pass
+    @classmethod
+    def find_contact_by_username(cls, username):
+        for user in cls.get_list_of_all():
+            if user.username == username:
+                return user
+
+
+    @staticmethod
+    def save_to_file(users_lst):
+        with open("users.pickle", "wb") as f:
+            pickle.dump(users_lst, f)
+
+
+    @classmethod
+    def delete_user(cls, username):
+        cls.get_list_of_all.remove(cls.find_user_by_username)
+        cls.save_to_file(cls.get_list_of_all())
 
 
 
