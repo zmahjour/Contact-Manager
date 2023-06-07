@@ -3,11 +3,11 @@ from users import User
 
 class Contact:
 
-    def __init__(self, name, email, phone, owner_user: User):
+    def __init__(self, name, email, phone):
         self.name = name
         self.email = email
         self.phone = phone
-        self.owner_user = owner_user
+        #self.owner_user = owner_user
 
 
     @classmethod    
@@ -19,13 +19,13 @@ class Contact:
 
     @staticmethod
     def get_list_of_all():
-        with open("contacts.pickle", "rb") as f:
+        with open("./data/contacts.pickle", "rb") as f:
             list_of_all = pickle.load(f)
             return list_of_all
 
 
     @classmethod
-    def edit_contact(cls, current_name, name=None, email=None, phone=None):
+    def edit_contact(cls, current_name, name, email, phone):
         obj = cls.find_contact_by_name(current_name)
         obj.name = name or obj.name
         obj.email = email or obj.email
@@ -36,7 +36,7 @@ class Contact:
     
     @staticmethod
     def save_to_file(contacts_lst):
-        with open("contacts.pickle", "wb") as f:
+        with open("./data/contacts.pickle", "wb") as f:
             pickle.dump(contacts_lst, f)
 
 

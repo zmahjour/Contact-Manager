@@ -16,7 +16,7 @@ class User:
 
     @staticmethod
     def get_list_of_all():
-        with open("users.pickle", "rb") as f:
+        with open("./data/users.pickle", "rb") as f:
             list_of_all = pickle.load(f)
             return list_of_all
 
@@ -51,7 +51,7 @@ class User:
 
     @staticmethod
     def save_to_file(users_lst):
-        with open("users.pickle", "wb") as f:
+        with open("./data/users.pickle", "wb") as f:
             pickle.dump(users_lst, f)
 
 
