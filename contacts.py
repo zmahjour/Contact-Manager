@@ -25,8 +25,12 @@ class Contact:
             return f
 
 
-    def edit_contact(self):
-        pass
+    @classmethod
+    def edit_contact(cls, current_name, name=None, email=None, phone=None):
+        obj = cls.find_contact_by_name(current_name)
+        obj.name = name or obj.name
+        obj.email = email or obj.email
+        obj.phone = phone or obj.phone
 
     
     @staticmethod
