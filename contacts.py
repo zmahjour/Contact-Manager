@@ -3,8 +3,6 @@ from users import User
 
 class Contact:
 
-    contacts = []
-
     def __init__(self, name, email, phone, owner_user: User):
         self.name = name
         self.email = email
@@ -14,15 +12,16 @@ class Contact:
 
     @classmethod    
     def add_contact(cls, name, email, phone):
-        new_contact = cls(name, email, phone)
-        cls.contacts.append(new_contact)
+        new_contact = [cls(name, email, phone)]
+        new_lst = cls.get_list_of_all() + new_contact
+        cls.save_to_file(new_lst)
 
 
     @staticmethod
     def get_list_of_all():
         with open("contacts.pickle", "rb") as f:
-            pickle.load(f)
-            return f
+            list_of_all = pickle.load(f)
+            return list_of_all
 
 
     @classmethod
@@ -31,26 +30,26 @@ class Contact:
         obj.name = name or obj.name
         obj.email = email or obj.email
         obj.phone = phone or obj.phone
+        cls.delete_contact(current_name)
+        cls.add_contact(obj.name, obj.email, obj.phone)
 
     
     @staticmethod
-    def save_contact_to_file():
+    def save_to_file(contacts_lst):
         with open("contacts.pickle", "wb") as f:
-            pickle.dump(Contact.contacts, f)
+            pickle.dump(contacts_lst, f)
 
 
     @classmethod
     def find_contact_by_name(cls, name):
-        contacts_lst = cls.get_list_of_all()
-        for contact in contacts_lst:
+        for contact in cls.get_list_of_all():
             if contact.name == name:
                 return contact
 
 
     @classmethod
     def find_contact_by_email(cls, email):
-        contacts_lst = cls.get_list_of_all()
-        for contact in contacts_lst:
+        for contact in cls.get_list_of_all():
             if contact.email == email:
                 return contact
 
@@ -61,4 +60,5 @@ class Contact:
 
     @classmethod
     def delete_contact(cls, name):
-        del cls.find_contact_by_name(name)
+        cls.get_list_of_all.remove(cls.find_contact_by_name)
+        cls.save_to_file(cls.get_list_of_all())
