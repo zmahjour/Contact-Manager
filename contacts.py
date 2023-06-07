@@ -19,9 +19,12 @@ class Contact:
 
     @staticmethod
     def get_list_of_all():
-        with open("./data/contacts.pickle", "rb") as f:
-            list_of_all = pickle.load(f)
-            return list_of_all
+        try:
+            with open("~/Samane/Python_VM/Maktab/W9/HW/Contact-Manager/data/contacts.pickle", "rb") as f:
+                list_of_all = pickle.load(f)
+                return list_of_all or []
+        except:
+            return []
 
 
     @classmethod
@@ -36,7 +39,7 @@ class Contact:
     
     @staticmethod
     def save_to_file(contacts_lst):
-        with open("./data/contacts.pickle", "wb") as f:
+        with open("~/Samane/Python_VM/Maktab/W9/HW/Contact-Manager/data/contacts.pickle", "wb") as f:
             pickle.dump(contacts_lst, f)
 
 

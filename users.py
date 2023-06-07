@@ -16,9 +16,12 @@ class User:
 
     @staticmethod
     def get_list_of_all():
-        with open("./data/users.pickle", "rb") as f:
-            list_of_all = pickle.load(f)
-            return list_of_all
+        try:
+            with open("~/Samane/Python_VM/Maktab/W9/HW/Contact-Manager/data/users.pickle", "rb") as f:
+                list_of_all = pickle.load(f)
+                return list_of_all or []
+        except:
+            return []
 
 
     def authenticate_account(self, username, password):
@@ -51,7 +54,7 @@ class User:
 
     @staticmethod
     def save_to_file(users_lst):
-        with open("./data/users.pickle", "wb") as f:
+        with open("~/Samane/Python_VM/Maktab/W9/HW/Contact-Manager/data/users.pickle", "wb") as f:
             pickle.dump(users_lst, f)
 
 
