@@ -10,7 +10,7 @@ def add_new_contact(name, email, phone):
 
 
 
-def edit_exist_contact(name, email, phone):  # How can find the user and then edit it?
+def edit_exist_contact(current_name, name, email, phone):  # How can find the user and then edit it?
     pass
 
 
